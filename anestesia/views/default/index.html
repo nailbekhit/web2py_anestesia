@@ -1,0 +1,22 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+{{if 'message' in globals():}}
+<h3>{{=message}}</h3>
+
+{{elif 'content' in globals():}}
+{{=content}}
+{{else:}}
+{{pass}}
+
+{{=botoes}}
+{{print DIV('<div_telas>', XML('<b>Aqui</b>'),_class='teste',_id='div_telas')}}
+<body>
+    <div id="divLoading" style="width: 100%;display: none;align-items: center"><img src="../static/images/loading.gif" width="90" height="90" width="400px"/>Carregando...</div>
+    <div id="'teste2">
+
+    </div>
+</body>
+{{block right_sidebar}}
+
+{{end}}

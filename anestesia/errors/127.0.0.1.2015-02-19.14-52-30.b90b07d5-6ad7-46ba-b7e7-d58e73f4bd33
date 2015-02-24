@@ -1,0 +1,523 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.SyntaxError'> Field: unknown field type: String for agente1"
+p3
+sS'layer'
+p4
+S'D:\\Desenvolvimento\\web2py\\applications\\anestesia\\models\\db.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\n\n#########################################################################\n## This scaffolding model makes your app work on Google App Engine too\n## File is released under public domain and you can use without limitations\n#########################################################################\n\n## if SSL/HTTPS is properly configured and you want all HTTP requests to\n## be redirected to HTTPS, uncomment the line below:\n# request.requires_https()\n\nif not request.env.web2py_runtime_gae:\n    ## if NOT running on Google App Engine use SQLite or other DB\n    #db = DAL(\'sqlite://storage.sqlite\',pool_size=1,check_reserved=[\'all\'])\n    db = DAL(\'postgres://postgres:devdtic2@teste.sistemas.unirio.br:5432/anestesia\')\nelse:\n    ## connect to Google BigTable (optional \'google:datastore://namespace\')\n    db = DAL(\'google:datastore+ndb\')\n    ## store sessions and tickets there\n    session.connect(request, response, db=db)\n    ## or store session in Memcache, Redis, etc.\n    ## from gluon.contrib.memdb import MEMDB\n    ## from google.appengine.api.memcache import Client\n    ## session.connect(request, response, db = MEMDB(Client()))\n\n## by default give a view/generic.extension to all actions from localhost\n## none otherwise. a pattern can be \'controller/function.extension\'\nresponse.generic_patterns = [\'*\'] if request.is_local else []\n\n## (optional) optimize handling of static files\n# response.optimize_css = \'concat,minify,inline\'\n# response.optimize_js = \'concat,minify,inline\'\n## (optional) static assets folder versioning\n# response.static_version = \'0.0.0\'\n#########################################################################\n## Here is sample code if you need for\n## - email capabilities\n## - authentication (registration, login, logout, ... )\n## - authorization (role based authorization)\n## - services (xml, csv, json, xmlrpc, jsonrpc, amf, rss)\n## - old style crud actions\n## (more options discussed in gluon/tools.py)\n#########################################################################\n\nfrom gluon.tools import Auth, Service, PluginManager\n\nauth = Auth(db)\nservice = Service()\nplugins = PluginManager()\n\n## create all tables needed by auth if not custom tables\nauth.define_tables(username=False, signature=False)\n\n## configure email\nmail = auth.settings.mailer\nmail.settings.server = \'logging\' if request.is_local else \'smtp.gmail.com:587\'\nmail.settings.sender = \'you@gmail.com\'\nmail.settings.login = \'username:password\'\n\n## configure auth policy\nauth.settings.registration_requires_verification = False\nauth.settings.registration_requires_approval = False\nauth.settings.reset_password_requires_verification = True\n\n## if you need to use OpenID, Facebook, MySpace, Twitter, Linkedin, etc.\n## register with janrain.com, write your domain:api_key in private/janrain.key\nfrom gluon.contrib.login_methods.janrain_account import use_janrain\nuse_janrain(auth, filename=\'private/janrain.key\')\n\n#########################################################################\n## Define your tables below (or better in another model file) for example\n##\n## >>> db.define_table(\'mytable\',Field(\'myfield\',\'string\'))\n##\n## Fields can be \'string\',\'text\',\'password\',\'integer\',\'double\',\'boolean\'\n##       \'date\',\'time\',\'datetime\',\'blob\',\'upload\', \'reference TABLENAME\'\n## There is an implicit \'id integer autoincrement\' field\n## Consult manual for more options, validators, etc.\n##\n## More API examples for controllers:\n##\n## >>> db.mytable.insert(myfield=\'value\')\n## >>> rows=db(db.mytable.myfield==\'value\').select(db.mytable.ALL)\n## >>> for row in rows: print row.id, row.myfield\n#########################################################################\n\n## after defining tables, uncomment below to enable auditing\n# auth.enable_record_versioning(db)\n\ndb.define_table(\'paciente\',\n                    Field(\'nr_registro\', \'integer\'),\n                    Field(\'matricula_hugg\', \'integer\'),\n                    Field(\'nome\', \'string\'),\n                    Field(\'data\', \'date\'),\n                    Field(\'ficha_nr\', \'integer\'),\n                    Field(\'enfermaria\', \'string\'),\n                    Field(\'leito\', \'string\'),\n                    Field(\'idade\', \'integer\'),\n                    Field(\'asa\'),\n                    Field(\'clinica\', \'string\'),\n                    Field(\'so\'),\n                    Field(\'dados_cadastrais_e\', \'boolean\'),\n                    Field(\'dados_cadastrais_sexo\', \'string\'),\n                    Field(\'altura\', \'double\'),\n                    Field(\'peso\', \'double\'),\n                    Field(\'temperatura\', \'double\'),\n                    Field(\'pulso\', \'integer\'),\n                    Field(\'respiracao\', \'integer\'),\n                    Field(\'pa\'),\n                    Field(\'diagnostico\', \'string\'),\n                    Field(\'dados_cirurgia_anterior\', \'string\'),\n                    Field(\'tabagismo\', \'boolean\'),\n                    Field(\'asma\', \'boolean\'),\n                    Field(\'tosse\', \'boolean\'),\n                    Field(\'dpoc\', \'boolean\'),\n                    Field(\'bk_insuficiencia\', \'boolean\'),\n                    Field(\'derrame_pleural\', \'boolean\'),\n                    Field(\'circunferencia_toraxica\', \'boolean\'),\n                    Field(\'has\', \'boolean\'),\n                    Field(\'icc\', \'boolean\'),\n                    Field(\'anglina\', \'boolean\'),\n                    Field(\'iam\', \'boolean\'),\n                    Field(\'valvulopalla\', \'boolean\'),\n                    Field(\'marcapasso\', \'boolean\'),\n                    Field(\'arritmias\', \'boolean\'),\n                    Field(\'insuf_venosa\', \'boolean\'),\n                    Field(\'diabetes\', \'boolean\'),\n                    Field(\'hipertireoidismo\', \'boolean\'),\n                    Field(\'endocrinopalias\', \'boolean\'),\n                    Field(\'cirrose\', \'boolean\'),\n                    Field(\'hepatite_a\', \'boolean\'),\n                    Field(\'hepatite_b\', \'boolean\'),\n                    Field(\'hepatite_c\', \'boolean\'),\n                    Field(\'elilismo\', \'boolean\'),\n                    Field(\'hiv\', \'boolean\'),\n                    Field(\'infeccoes_oportunistas\', \'boolean\'),\n                    Field(\'insuf_renal\', \'boolean\'),\n                    Field(\'hemodialise_peritoneal\', \'boolean\'),\n                    Field(\'disturbios_hemorragicos\', \'boolean\'),\n                    Field(\'avc_previo\', \'boolean\'),\n                    Field(\'doencas_psiquiatricas\', \'boolean\'),\n                    Field(\'doencas_neuromuscular\', \'boolean\'),\n                    Field(\'doencas_reumaticas\', \'boolean\'),\n                    Field(\'alteracao_neurologica\', \'boolean\'),\n                    Field(\'hemotransfusao_previa\', \'boolean\'),\n                    Field(\'obs_gerais\', \'text\'),\n                    Field(\'medicamentos_em_uso\', \'string\'),\n                    Field(\'alergias\', \'string\'),\n                    Field(\'cirurgias_previas\', \'string\'),\n                    Field(\'mallampati\', \'string\'),\n                    Field(\'abertura_boca\', \'boolean\'),\n                    Field(\'dentes_falhos\', \'boolean\'),\n                    Field(\'protese\', \'boolean\'),\n                    Field(\'macroglossia\', \'boolean\'),\n                    Field(\'distancia_esterno_mento\', \'string\'),\n                    Field(\'pescoco_curto_longo\', \'string\'),\n                    Field(\'mobilidade_cervical\', \'string\'),\n                    Field(\'massa_cervical\', \'boolean\'),\n                    Field(\'desvio_traqueia\', \'boolean\'),\n                    Field(\'distancia_mento_hiloide\', \'string\'),\n                    Field(\'circunferencia_cervical\', \'string\'),\n                    Field(\'dificuldade_intubacao\', \'boolean\'),\n                    Field(\'via_aerea_dificil\', \'boolean\'),\n                    Field(\'historia_de_anafilaxia\', \'boolean\'),\n                    Field(\'estomago_cheio\', \'boolean\'),\n                    Field(\'corticoide\', \'boolean\'),\n                    Field(\'endocardite_bacteriana\', \'boolean\'),\n                    Field(\'hb\', \'string\'),\n                    Field(\'ht\', \'string\'),\n                    Field(\'hm\', \'string\'),\n                    Field(\'plaquetas\', \'string\'),\n                    Field(\'glicose\', \'string\'),\n                    Field(\'u\', \'string\'),\n                    Field(\'cr\', \'string\'),\n                    Field(\'na\', \'string\'),\n                    Field(\'k\', \'string\'),\n                    Field(\'duracao_procedimento\', \'string\'),\n                    Field(\'duracao_cirurgia\', \'string\'),\n                    Field(\'cardioscopio\', \'boolean\'),\n                    Field(\'ox_digital\', \'boolean\'),\n                    Field(\'pni\', \'boolean\'),\n                    Field(\'painv\', \'boolean\'),\n                    Field(\'capnografo\', \'boolean\'),\n                    Field(\'an_gases\', \'boolean\'),\n                    Field(\'outros_monitorizacao\', \'string\'),\n                    Field(\'tec_geral\', \'boolean\'),\n                    Field(\'plexo\', \'boolean\'),\n                    Field(\'bloqueio_neuroeixo\', \'boolean\'),\n                    Field(\'combinada\', \'boolean\'),\n                    Field(\'sedacao\', \'boolean\'),\n                    Field(\'sub_mascara\', \'boolean\'),\n                    Field(\'canula_naso\', \'boolean\'),\n                    Field(\'canula_orofaringea\', \'boolean\'),\n                    Field(\'mascara_laringea\', \'boolean\'),\n                    Field(\'nr_mascara_laringea\', \'string\'),\n                    Field(\'intubacao_oro_traqueal\', \'boolean\'),\n                    Field(\'agente1\', "String", default=\'dtic\'),\n                    Field(\'agente2\', \'string\', default=\'null\'),\n                    Field(\'agente3\', \'string\', default=\'2\'),\n                    Field(\'agente4\', \'string\', default=None),\n                    Field(\'agente5\', \'string\', default=None),\n                    Field(\'agente6\', \'string\', default=None),\n                    Field(\'agente7\', \'string\', default=None),\n                    Field(\'agente8\', \'string\', default=None),\n                    Field(\'agente9\', \'string\', default=None),\n                    Field(\'agente10\', \'string\', default=None),\n                    Field(\'diametro_tubo\', \'string\'),\n                    Field(\'tipo_naso\', \'boolean\'),\n                    Field(\'tipo_aramado\', \'boolean\'),\n                    Field(\'dupla_luz\', \'boolean\'),\n                    Field(\'balao\', \'boolean\'),\n                    Field(\'laringoscopia\', \'boolean\'),\n                    Field(\'broncofibroscopia\', \'boolean\'),\n                    Field(\'estilete_luminoso\', \'boolean\'),\n                    Field(\'videolaringoscopia\', \'boolean\'),\n                    Field(\'cirurgia\', \'string\'),\n                    Field(\'anestesia\', \'string\'),\n                    Field(\'cirurgiao\', \'string\'),\n                    )\n\ndb.paciente.nome.requires = IS_NOT_EMPTY(error_message=\'O Nome n\xc3\xa3o pode estar sem preenchimento.\')\ndb.paciente.matricula_hugg.requires = IS_NOT_EMPTY()\ndb.paciente.agente1.default = \'null\''
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__getslice__'
+p12
+S"<method-wrapper '__getslice__' of exceptions.SyntaxError object>"
+p13
+sS'text'
+p14
+S'None'
+p15
+sS'__str__'
+p16
+S"<method-wrapper '__str__' of exceptions.SyntaxError object>"
+p17
+sS'__reduce__'
+p18
+S'<built-in method __reduce__ of exceptions.SyntaxError object>'
+p19
+sS'__dict__'
+p20
+S'{}'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of exceptions.SyntaxError object>'
+p23
+sS'__init__'
+p24
+S"<method-wrapper '__init__' of exceptions.SyntaxError object>"
+p25
+sS'__setattr__'
+p26
+S"<method-wrapper '__setattr__' of exceptions.SyntaxError object>"
+p27
+sS'__reduce_ex__'
+p28
+S'<built-in method __reduce_ex__ of exceptions.SyntaxError object>'
+p29
+sS'__new__'
+p30
+S'<built-in method __new__ of type object>'
+p31
+sS'__format__'
+p32
+S'<built-in method __format__ of exceptions.SyntaxError object>'
+p33
+sS'__class__'
+p34
+S"<type 'exceptions.SyntaxError'>"
+p35
+sS'filename'
+p36
+S'None'
+p37
+sS'lineno'
+p38
+S'None'
+p39
+sS'msg'
+p40
+S"'Field: unknown field type: String for agente1'"
+p41
+sS'__doc__'
+p42
+S"'Invalid syntax.'"
+p43
+sS'__getitem__'
+p44
+S"<method-wrapper '__getitem__' of exceptions.SyntaxError object>"
+p45
+sS'__setstate__'
+p46
+S'<built-in method __setstate__ of exceptions.SyntaxError object>'
+p47
+sS'__getattribute__'
+p48
+S"<method-wrapper '__getattribute__' of exceptions.SyntaxError object>"
+p49
+sS'print_file_and_line'
+p50
+S'None'
+p51
+sS'args'
+p52
+S"('Field: unknown field type: String for agente1',)"
+p53
+sS'__subclasshook__'
+p54
+S'<built-in method __subclasshook__ of type object>'
+p55
+sS'offset'
+p56
+S'None'
+p57
+sS'__unicode__'
+p58
+S'<built-in method __unicode__ of exceptions.SyntaxError object>'
+p59
+sS'__delattr__'
+p60
+S"<method-wrapper '__delattr__' of exceptions.SyntaxError object>"
+p61
+sS'__repr__'
+p62
+S"<method-wrapper '__repr__' of exceptions.SyntaxError object>"
+p63
+sS'__hash__'
+p64
+S"<method-wrapper '__hash__' of exceptions.SyntaxError object>"
+p65
+ssS'evalue'
+p66
+S'Field: unknown field type: String for agente1'
+p67
+sS'request'
+p68
+cgluon.html
+XML_unpickle
+p69
+(S's"\\\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>anestesia</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>pagina_incluir</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-cf9e9df7-34e9-417f-9cea-12f057bec499<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_anestesia</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-07d951ea-8cf7-4e82-a6de-06503b670871<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CACHE_CONTROL</td><td style="vertical-align:top;">:</td><td><div>no-cache</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>session_id_anestesia=127.0.0.1-07d951ea-8cf7-4e82-a6de-06503b670871; session_id_admin=127.0.0.1-cf9e9df7-34e9-417f-9cea-12f057bec499</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_PRAGMA</td><td style="vertical-align:top;">:</td><td><div>no-cache</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8000/anestesia/pagina_incluir/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Windows NT 6.3; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/anestesia/pagina_incluir/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>60136</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>MOHAMED-DTIC</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_SOFTWARE</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;D:\\\\Desenvolvimento\\\\web2py\\\\applications\\\\admin\\\\&#x27;, &#x27;D:\\\\Desenvolvimento\\\\web2py\\\\applications\\\\anestesia\\\\&#x27;, &#x27;D:\\\\Desenvolvimento\\\\web2py\\\\applications\\\\welcome\\\\&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>D:\\Desenvolvimento\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x2fbb698: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;ips&#x27;: [&#x27;192.168.71.1&#x27;, &#x27;fe80::4023:9900:3196:7ccb%5&#x27;, &#x27;10.129.18.33&#x27;, &#x27;192.168.16.1&#x27;, &#x27;fe80::6dc3:bcf7:daee:374c%7&#x27;, &#x27;fe80::4932:49bd:49c6:6ebe%3&#x27;], &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;scheduler_groups&#x27;: None, &#x27;port&#x27;: 8000, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;MOHAMED-DTIC&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: False, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;D:\\\\Desenvolvimento\\\\web2py&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;gae&#x27;: None, &#x27;password&#x27;: &#x27;&lt;ask&gt;&#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>D:\\Desenvolvimento\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cache_control</td><td style="vertical-align:top;">:</td><td><div>no-cache</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>session_id_anestesia=127.0.0.1-07d951ea-8cf7-4e82-a6de-06503b670871; session_id_admin=127.0.0.1-cf9e9df7-34e9-417f-9cea-12f057bec499</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_pragma</td><td style="vertical-align:top;">:</td><td><div>no-cache</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8000/anestesia/pagina_incluir/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Windows NT 6.3; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>192.168.71.1</div></td></tr><tr><td><div>fe80::4023:9900:3196:7ccb%5</div></td></tr><tr><td><div>fe80::6dc3:bcf7:daee:374c%7</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>MOHAMED-DTIC</div></td></tr><tr><td><div>10.129.18.33</div></td></tr><tr><td><div>192.168.16.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>MOHAMED-DTIC.unirio.br</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>fe80::4932:49bd:49c6:6ebe%3</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/anestesia/pagina_incluir/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>60136</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/anestesia/pagina_incluir/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>MOHAMED-DTIC</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_software</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>D:\\Desenvolvimento\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.9.11-stable+timestamp.2014.09.15.23.35.11</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x01CE50D0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x02F691F0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x088BD030&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x01CE50D0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x02F691F0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x088BD030&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>D:\\Desenvolvimento\\web2py\\applications\\anestesia\\</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;D:\\\\Desenvolvimento\\\\web2py\\\\applications\\\\admin\\\\&#x27;, &#x27;D:\\\\Desenvolvimento\\\\web2py\\\\applications\\\\anestesia\\\\&#x27;, &#x27;D:\\\\Desenvolvimento\\\\web2py\\\\applications\\\\welcome\\\\&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>D:\\Desenvolvimento\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x2fbb698: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;ips&#x27;: [&#x27;192.168.71.1&#x27;, &#x27;fe80::4023:9900:3196:7ccb%5&#x27;, &#x27;10.129.18.33&#x27;, &#x27;192.168.16.1&#x27;, &#x27;fe80::6dc3:bcf7:daee:374c%7&#x27;, &#x27;fe80::4932:49bd:49c6:6ebe%3&#x27;], &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;scheduler_groups&#x27;: None, &#x27;port&#x27;: 8000, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;MOHAMED-DTIC&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: False, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;D:\\\\Desenvolvimento\\\\web2py&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;gae&#x27;: None, &#x27;password&#x27;: &#x27;&lt;ask&gt;&#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>D:\\Desenvolvimento\\web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>192.168.71.1</div></td></tr><tr><td><div>fe80::4023:9900:3196:7ccb%5</div></td></tr><tr><td><div>fe80::6dc3:bcf7:daee:374c%7</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>MOHAMED-DTIC</div></td></tr><tr><td><div>10.129.18.33</div></td></tr><tr><td><div>192.168.16.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>MOHAMED-DTIC.unirio.br</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>fe80::4932:49bd:49c6:6ebe%3</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.9.11-stable+timestamp.2014.09.15.23.35.11</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_sheduler</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2015, 2, 19, 14, 52, 30, 553000)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_args</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_extension</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/anestesia/pagina_incluir/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2015, 2, 19, 16, 52, 30, 553000)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uuid</td><td style="vertical-align:top;">:</td><td><div>anestesia/127.0.0.1.2015-02-19.14-52-30.b90b07d5-6ad7-46ba-b7e7-d58e73f4bd33</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x081D1950&gt;</div></td></tr></table></div>'
+tRp70
+sS'frames'
+p71
+(lp72
+(dp73
+S'file'
+p74
+S'D:\\Desenvolvimento\\web2py\\gluon\\restricted.py'
+p75
+sS'dump'
+p76
+(dp77
+S'environment'
+p78
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, 'CAT': <class 'gluon.html.CAT'>, ...}"
+p79
+sS'ccode'
+p80
+S'<code object <module> at 03369650, file "D:\\Dese...py\\applications\\anestesia\\models\\db.py", line 12>'
+p81
+ssS'lnum'
+p82
+I224
+sS'lines'
+p83
+(dp84
+I224
+S'        exec ccode in environment'
+p85
+sI225
+S'    except HTTP:'
+p86
+sI226
+S'        raise'
+p87
+sI227
+S'    except RestrictedError:'
+p88
+sI228
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p89
+sI219
+S'    try:'
+p90
+sI220
+S'        if isinstance(code, types.CodeType):'
+p91
+sI221
+S'            ccode = code'
+p92
+sI222
+S'        else:'
+p93
+sI223
+S'            ccode = compile2(code, layer)'
+p94
+ssS'call'
+p95
+S'(code="# -*- coding: utf-8 -*-\\n\\n#######################..._NOT_EMPTY()\\ndb.paciente.agente1.default = \'null\'", environment={\'A\': <class \'gluon.html.A\'>, \'ANY_OF\': <class \'gluon.validators.ANY_OF\'>, \'ASSIGNJS\': <function ASSIGNJS>, \'Auth\': <class \'gluon.tools.Auth\'>, \'B\': <class \'gluon.html.B\'>, \'BEAUTIFY\': <class \'gluon.html.BEAUTIFY\'>, \'BODY\': <class \'gluon.html.BODY\'>, \'BR\': <class \'gluon.html.BR\'>, \'BUTTON\': <class \'gluon.html.BUTTON\'>, \'CAT\': <class \'gluon.html.CAT\'>, ...}, layer=r\'D:\\Desenvolvimento\\web2py\\applications\\anestesia\\models\\db.py\')'
+p96
+sS'func'
+p97
+S'restricted'
+p98
+sa(dp99
+g74
+S'D:\\Desenvolvimento\\web2py\\applications\\anestesia\\models\\db.py'
+p100
+sg76
+(dp101
+S'Field'
+p102
+S"<class 'gluon.dal.Field'>"
+p103
+ssg82
+I218
+sg83
+(dp104
+I213
+S"                    Field('broncofibroscopia', 'boolean'),"
+p105
+sI214
+S"                    Field('estilete_luminoso', 'boolean'),"
+p106
+sI215
+S"                    Field('videolaringoscopia', 'boolean'),"
+p107
+sI216
+S"                    Field('cirurgia', 'string'),"
+p108
+sI217
+S"                    Field('anestesia', 'string'),"
+p109
+sI218
+S"                    Field('cirurgiao', 'string'),"
+p110
+sI219
+S'                    )'
+p111
+sI220
+S''
+sI221
+S"db.paciente.nome.requires = IS_NOT_EMPTY(error_message='O Nome n\xc3\xa3o pode estar sem preenchimento.')"
+p112
+sI222
+S'db.paciente.matricula_hugg.requires = IS_NOT_EMPTY()'
+p113
+ssg95
+S'()'
+p114
+sg97
+S'<module>'
+p115
+sa(dp116
+g74
+S'D:\\Desenvolvimento\\web2py\\gluon\\dal.py'
+p117
+sg76
+(dp118
+S'fields'
+p119
+S'(<gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, ...)'
+p120
+sS'self'
+p121
+S'<DAL uri="postgres:******@teste.sistemas.unirio.br:5432/anestesia">'
+p122
+sS'args'
+p123
+g21
+sS'tablename'
+p124
+S"'paciente'"
+p125
+sS'table'
+p126
+S'undefined'
+p127
+sS'self.lazy_define_table'
+p128
+S'<bound method DAL.lazy_define_table of <DAL uri=...******@teste.sistemas.unirio.br:5432/anestesia">>'
+p129
+ssg82
+I8414
+sg83
+(dp130
+I8416
+S'            self.tables.append(tablename)'
+p131
+sI8417
+S'        return table'
+p132
+sI8418
+S''
+sI8409
+S'                    % (tablename, invalid_args))'
+p133
+sI8410
+S'        if self._lazy_tables and not tablename in self._LAZY_TABLES:'
+p134
+sI8411
+S'            self._LAZY_TABLES[tablename] = (tablename, fields, args)'
+p135
+sI8412
+S'            table = None'
+p136
+sI8413
+S'        else:'
+p137
+sI8414
+S'            table = self.lazy_define_table(tablename, *fields, **args)'
+p138
+sI8415
+S'        if not tablename in self.tables:'
+p139
+ssg95
+S'(self=<DAL uri="postgres:******@teste.sistemas.unirio.br:5432/anestesia">, tablename=\'paciente\', *fields=(<gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, ...), **args={})'
+p140
+sg97
+S'define_table'
+p141
+sa(dp142
+g74
+S'D:\\Desenvolvimento\\web2py\\gluon\\dal.py'
+p143
+sg76
+(dp144
+S'polymodel'
+p145
+S'None'
+p146
+ssg82
+I8450
+sg83
+(dp147
+I8448
+S'                    table, migrate=migrate,'
+p148
+sI8449
+S'                    fake_migrate=fake_migrate,'
+p149
+sI8450
+S'                    polymodel=polymodel)'
+p150
+sI8451
+S'            finally:'
+p151
+sI8452
+S'                GLOBAL_LOCKER.release()'
+p152
+sI8453
+S'        else:'
+p153
+sI8454
+S'            table._dbt = None'
+p154
+sI8445
+S'            try:'
+p155
+sI8446
+S'                GLOBAL_LOCKER.acquire()'
+p156
+sI8447
+S'                self._lastsql = self._adapter.create_table('
+p157
+ssg95
+S'(self=<DAL uri="postgres:******@teste.sistemas.unirio.br:5432/anestesia">, tablename=\'paciente\', *fields=(<gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, ...), **args={})'
+p158
+sg97
+S'lazy_define_table'
+p159
+sa(dp160
+g74
+S'D:\\Desenvolvimento\\web2py\\gluon\\dal.py'
+p161
+sg76
+(dp162
+S'field_type'
+p163
+S"'String'"
+p164
+sS'field_name'
+p165
+S"'agente1'"
+p166
+ssg82
+I1010
+sg83
+(dp167
+I1005
+S'                                         fieldname=field_name, srid=srid,'
+p168
+sI1006
+S'                                         dimension=dimension)'
+p169
+sI1007
+S'                    postcreation_fields.append(ftype)'
+p170
+sI1008
+S'            elif not field_type in types:'
+p171
+sI1009
+S"                raise SyntaxError('Field: unknown field type: %s for %s'"
+p172
+sI1010
+S'                                  % (field_type, field_name))'
+p173
+sI1011
+S'            else:'
+p174
+sI1012
+S'                ftype = types[field_type]\\'
+p175
+sI1013
+S'                     % dict(length=field.length)'
+p176
+sI1014
+S"            if not field_type.startswith('id') and \\"
+p177
+ssg95
+S'(self=<gluon.dal.PostgreSQLAdapter object>, table=<Table paciente (id,nr_registro,matricula_hugg,n...videolaringoscopia,cirurgia,anestesia,cirurgiao)>, migrate=True, fake_migrate=False, polymodel=None)'
+p178
+sg97
+S'create_table'
+p179
+sasS'pyver'
+p180
+S'Python 2.7: C:\\Python27\\python.exe (prefix: C:\\Python27)'
+p181
+sS'session'
+p182
+g69
+(S's\x9c\x00\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr></table></div>'
+tRp183
+sS'etype'
+p184
+S"<type 'exceptions.SyntaxError'>"
+p185
+sS'date'
+p186
+S'Thu Feb 19 14:52:30 2015'
+p187
+sS'response'
+p188
+g69
+(S's\x13\x18\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x088A3AE0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_anestesia</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-07d951ea-8cf7-4e82-a6de-06503b670871<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div>: </div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>table3cols</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>*</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^pagina_incluir/\\w+\\.py$</div></td></tr><tr><td><div>^pagina_incluir/index/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_key</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_anestesia</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;D:\\Desenvolvimento\\web2py\\applications\\anestesia\\sessions\\00d\\126\\127.0.0.1-07d951ea-8cf7-4e82-a6de-06503b670871&#x27;, mode &#x27;rb+&#x27; at 0x088499C0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>D:\\Desenvolvimento\\web2py\\applications\\anestesia\\sessions\\127.0.0.1-07d951ea-8cf7-4e82-a6de-06503b670871</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>47751df726fce6575ab6f4b873728ff9</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-07d951ea-8cf7-4e82-a6de-06503b670871</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_anestesia</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>anestesia</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>pagina_incluir/index.html</div></td></tr></table></div>'
+tRp189
+sS'locals'
+p190
+(dp191
+S'postcreation_fields'
+p192
+S'[]'
+p193
+sS'field_type'
+p194
+S"'String'"
+p195
+sS'sortable'
+p196
+S'108'
+p197
+sS'sql_fields_aux'
+p198
+S"{'abertura_boca': {'sql': 'CHAR(1)'}, 'alergias': {'sql': 'VARCHAR(512)'}, 'alteracao_neurologica': {'sql': 'CHAR(1)'}, 'altura': {'sql': 'FLOAT8'}, 'an_gases': {'sql': 'CHAR(1)'}, 'anglina': {'sql': 'CHAR(1)'}, 'arritmias': {'sql': 'CHAR(1)'}, 'asa': {'sql': 'VARCHAR(512)'}, 'asma': {'sql': 'CHAR(1)'}, 'avc_previo': {'sql': 'CHAR(1)'}, ...}"
+p199
+sS'TFK'
+p200
+g21
+sS'migrate'
+p201
+S'True'
+p202
+sS'fields'
+p203
+S"['id SERIAL PRIMARY KEY', 'nr_registro INTEGER', 'matricula_hugg INTEGER', 'nome VARCHAR(512)', 'data DATE', 'ficha_nr INTEGER', 'enfermaria VARCHAR(512)', 'leito VARCHAR(512)', 'idade INTEGER', 'asa VARCHAR(512)', 'clinica VARCHAR(512)', 'so VARCHAR(512)', 'dados_cadastrais_e CHAR(1)', 'dados_cadastrais_sexo VARCHAR(512)', 'altura FLOAT8', 'peso FLOAT8', 'temperatura FLOAT8', 'pulso INTEGER', 'respiracao INTEGER', 'pa VARCHAR(512)', ...]"
+p204
+sS'self'
+p205
+S'<gluon.dal.PostgreSQLAdapter object>'
+p206
+sS'tablename'
+p207
+S"'paciente'"
+p208
+sS'fake_migrate'
+p209
+S'False'
+p210
+sS'db'
+p211
+S'<DAL uri="postgres:******@teste.sistemas.unirio.br:5432/anestesia">'
+p212
+sS'field'
+p213
+S'<gluon.dal.Field object>'
+p214
+sS'ftype'
+p215
+S"'CHAR(1)'"
+p216
+sS'polymodel'
+p217
+S'None'
+p218
+sS'table'
+p219
+S'<Table paciente (id,nr_registro,matricula_hugg,n...videolaringoscopia,cirurgia,anestesia,cirurgiao)>'
+p220
+sS'sql_fields'
+p221
+S"{'abertura_boca': {'length': 512, 'notnull': False, 'sortable': 62, 'sql': 'CHAR(1)', 'type': 'boolean', 'unique': False}, 'alergias': {'length': 512, 'notnull': False, 'sortable': 59, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'alteracao_neurologica': {'length': 512, 'notnull': False, 'sortable': 55, 'sql': 'CHAR(1)', 'type': 'boolean', 'unique': False}, 'altura': {'length': 512, 'notnull': False, 'sortable': 15, 'sql': 'FLOAT8', 'type': 'double', 'unique': False}, 'an_gases': {'length': 512, 'notnull': False, 'sortable': 95, 'sql': 'CHAR(1)', 'type': 'boolean', 'unique': False}, 'anglina': {'length': 512, 'notnull': False, 'sortable': 32, 'sql': 'CHAR(1)', 'type': 'boolean', 'unique': False}, 'arritmias': {'length': 512, 'notnull': False, 'sortable': 36, 'sql': 'CHAR(1)', 'type': 'boolean', 'unique': False}, 'asa': {'length': 512, 'notnull': False, 'sortable': 10, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'asma': {'length': 512, 'notnull': False, 'sortable': 24, 'sql': 'CHAR(1)', 'type': 'boolean', 'unique': False}, 'avc_previo': {'length': 512, 'notnull': False, 'sortable': 51, 'sql': 'CHAR(1)', 'type': 'boolean', 'unique': False}, ...}"
+p222
+sS'field_name'
+p223
+S"'agente1'"
+p224
+sS'types'
+p225
+S"{'big-id': 'BIGSERIAL PRIMARY KEY', 'big-reference': 'BIGINT REFERENCES %(foreign_key)s ON DELETE %(on_delete_action)s', 'bigint': 'BIGINT', 'blob': 'BYTEA', 'boolean': 'CHAR(1)', 'date': 'DATE', 'datetime': 'TIMESTAMP', 'decimal': 'NUMERIC(%(precision)s,%(scale)s)', 'double': 'FLOAT8', 'float': 'FLOAT', ...}"
+p226
+sssS'traceback'
+p227
+S'Traceback (most recent call last):\n  File "D:\\Desenvolvimento\\web2py\\gluon\\restricted.py", line 224, in restricted\n    exec ccode in environment\n  File "D:\\Desenvolvimento\\web2py\\applications\\anestesia\\models\\db.py", line 218, in <module>\n    Field(\'cirurgiao\', \'string\'),\n  File "D:\\Desenvolvimento\\web2py\\gluon\\dal.py", line 8414, in define_table\n    table = self.lazy_define_table(tablename, *fields, **args)\n  File "D:\\Desenvolvimento\\web2py\\gluon\\dal.py", line 8450, in lazy_define_table\n    polymodel=polymodel)\n  File "D:\\Desenvolvimento\\web2py\\gluon\\dal.py", line 1010, in create_table\n    % (field_type, field_name))\nSyntaxError: Field: unknown field type: String for agente1\n'
+p228
+s.

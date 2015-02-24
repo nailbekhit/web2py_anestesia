@@ -1,0 +1,31 @@
+{{extend 'layout.html'}}
+<script src={{=URL('static','js/pagina_buscar.js')}}></script>
+
+{{=busca}}
+
+<div id="divResultado" >
+    <table id="tableResultado">
+        {{if nr_linhas <> 0:}}
+        <tr id="linha_cabecalho">
+            <th></th>
+            <th id='th_matricula_hugg'>Matricula HUGG</th>
+            <th id='th_nr_registro'>Número Registro</th>
+            <th id='th_nome'>Nome</th>
+        </tr>
+            {{pass}}
+        {{pass}}
+        {{for linha in linhas:}}
+        <tr id="id_linha_busca_'+linha">
+            <td><input type="radio" value='{{=linha.id}}' id="radio_{{=linha.id}}" name="radio_buscar" onclick="fn_alterar_dados({{=linha.id}})" /></td>
+            <!--<td><input type="radio" value='{{=linha.id}}' id="radio_{{=linha.id}}" onclick="" /></td>-->
+            <td>{{=linha.matricula_hugg}}</td>
+            <td>{{=linha.nr_registro}}</td>
+            <td>{{=linha.nome}}</td>
+        </tr>
+        {{pass}}
+    </table>
+</div>
+<p id="teste_de_id" name="teste_de_id"></p>
+<div id="div_alteracao">
+
+</div>

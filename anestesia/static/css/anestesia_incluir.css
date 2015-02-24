@@ -1,0 +1,1026 @@
+#div_dados_cadastrais{
+    min-width: 50%;
+    border: 1px solid;
+}
+
+#matricula_hugg{
+    width: 95px;
+    margin-right: 10px;
+}
+
+#ficha_nr{
+    width: 95px;
+}
+
+#data{
+    width: 70px;
+}
+
+#lgd_dados_cadastrais{
+    text-align: center;
+}
+
+#td1{
+    width: 200px;
+    margin-left: 100px;
+}
+
+#td2{
+    margin-left: 100px;
+}
+
+#cd{
+    margin-left: 100px;
+}
+
+#div_outros_esq{
+    float:left;
+}
+
+#div_outros_centro{
+    float:left;
+}
+
+#div_outros_direita{
+    float:left;
+}
+
+#txtarea_obs_geral{
+    max-height: 300px;
+    min-height: 300px;
+    max-width: 300px;
+    min-width: 300px;
+}
+
+#nr_registro{
+    width: 90px;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+#mat_hugg{
+    width: 120px;
+    margin-right: 50px;
+    margin-left: 5px;
+}
+
+#idade{
+    width: 25px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#asa{
+    width: 25px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#radio_dados_cadastrais_e_sim{
+    margin-left: 5px;
+}
+
+#radio_dados_cadastrais_e_nao{
+    margin-left: 5px;
+}
+
+#radio_sexo_f{
+    margin-left: 5px;
+    margin-right: 1px;
+}
+
+#radio_sexo_m{
+    margin-left: 5px;
+    margin-right: 1px;
+}
+
+#enf{
+    width: 250px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#leito{
+    width: 90px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#so{
+    width: 90px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#altura{
+    width: 50px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#peso{
+    width: 50px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#temp{
+    width: 50px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#pulso{
+    width: 50px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#resp{
+    width: 90px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#pa{
+    width: 50px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#diagnostico{
+    width: 480px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#cirurgia{
+    width: 480px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+#div_respiratorio{
+    width: 49%;
+    float: left;
+    border: 1px solid;
+    height: 250px;
+}
+
+#div_cardiovascular{
+    width: 49%;
+    float: left;
+    border: 1px solid;
+    height: 250px;
+}
+
+#lgd_respiratorio{
+    text-align: center;
+}
+
+#lgd_cardiovascular{
+    text-align: center;
+}
+
+#radio_tabag_sim{
+    margin-left: 114px;
+}
+#radio_tabag_nao{
+    margin-left: 5px;
+}
+
+#radio_asma_sim{
+    margin-left: 147px;
+}
+#radio_asma_nao{
+    margin-left: 5px;
+}
+
+#radio_tosse_sim{
+    margin-left: 47px;
+}
+#radio_tosse_nao{
+    margin-left: 5px;
+}
+
+#radio_dpoc_sim{
+    margin-left: 36px;
+}
+#radio_dpoc_nao{
+    margin-left: 5px;
+}
+
+#radio_bk_sim{
+    margin-left: 45px;
+}
+#radio_bk_nao{
+    margin-left: 5px;
+}
+
+#radio_der_pleural_sim{
+    margin-left: 10px;
+}
+#radio_der_pleural_nao{
+    margin-left: 5px;
+}
+
+#radio_circ_tor_sim{
+    margin-left: 104px;
+}
+#radio_circ_tor_nao{
+    margin-left: 5px;
+}
+
+#radio_has_sim{
+    margin-left: 67px;
+}
+#radio_has_nao{
+    margin-left: 5px;
+}
+
+#radio_icc_sim{
+    margin-left: 72px;
+}
+#radio_icc_nao{
+    margin-left: 5px;
+}
+
+#radio_anglina_sim{
+    margin-left: 47px;
+}
+#radio_anglina_nao{
+    margin-left: 5px;
+}
+
+#radio_iam_sim{
+    margin-left: 71px;
+}
+#radio_iam_nao{
+    margin-left: 5px;
+}
+
+#radio_valvulopalla_sim{
+    margin-left: 20px;
+}
+#radio_valvulopalla_nao{
+    margin-left: 5px;
+}
+
+#radio_marcapasso_sim{
+    margin-left: 18px;
+}
+#radio_marcapasso_nao{
+    margin-left: 5px;
+}
+
+#radio_arritmias_sim{
+    margin-left: 40px;
+}
+#radio_arritmias_nao{
+    margin-left: 5px;
+}
+
+#radio_insuf_venosa_sim{
+    margin-left: 10px;
+}
+#radio_insuf_venosa_nao{
+    margin-left: 5px;
+}
+
+#lgd_outros{
+    text-align: center;
+}
+
+#div_outros_esq{
+    float: left;
+    width: 33%;
+}
+
+#div_outros_centro{
+    float: left;
+    width: 33%;
+}
+
+#div_outros_dir{
+    float: left;
+    width: 33%;
+}
+
+#txtarea_obs_gerais{
+    max-height: 170px;
+    min-height: 170px;
+    max-width: 380px;
+    min-width: 380px;
+}
+
+#txt_med_em_uso{
+    margin-left: 5px;
+    width: 600px;
+    margin-right: 20px;
+}
+
+#txt_alergias{
+    margin-left: 5px;
+    width: 300px;
+}
+
+#txt_cir_previas{
+    width: 98%;
+}
+
+#div_cavidade_oral{
+    float: left;
+    width: 32%;
+    height: 350px;
+    border: 1px solid;
+    padding-left: 10px;
+}
+
+#field_vias_aereas{
+    width: 95%;
+    text-align: center;
+    font-size: x-large;
+}
+
+#lgd_vias_aereas{
+    text-align: center;
+}
+
+#lgd_cavidade_oral{
+    text-align: center;
+}
+
+#div_pescoco{
+    float: left;
+    width: 32%;
+    height: 350px;
+    border: 1px solid;
+    padding-left: 10px;
+}
+
+#div_atencao{
+    float: left;
+    width: 32%;
+    height: 350px;
+    border: 1px solid;
+    padding-left: 10px;
+}
+
+#dist_est_mento{
+    width: 50px;
+    margin-left: 40px;
+}
+
+#curto_longo{
+    width: 50px;
+    margin-left: 110px;
+}
+
+#mob_cervical{
+    width: 50px;
+    margin-left: 10px;
+}
+
+#massa_cervical{
+    width: 50px;
+    margin-left: 102px;
+}
+#radio_massa_cervical_sim{
+    margin-left: 102px;
+}
+#radio_massa_cervical_nao{
+    margin-left: 5px;
+}
+
+#desv_traqueia{
+    width: 50px;
+    margin-left: 77px;
+}
+#radio_desvio_traqueia_sim{
+    margin-left: 77px;
+}
+#radio_desvio_traqueia_nao{
+    margin-left: 5px;
+}
+
+#dist_mento_hioide{
+    width: 50px;
+    margin-left: 49px;
+}
+
+#circunferencia_cervical{
+    width: 50px;
+    margin-left: 50px;
+}
+
+#lgd_vias_aereas{
+    text-align: center;
+}
+#lgd_pescoco{
+    text-align: center;
+}
+
+#lgd_atencao{
+    text-align: center;
+}
+
+#div_exames_laboratoriais{
+    text-align: center;
+}
+
+#txt_hb{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#txt_ht{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#txt_hm{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#txt_plaq{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#txt_gli{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#txt_u{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#txt_cr{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#txt_na{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#txt_k{
+    width: 60px;
+    margin-right: 15px;
+}
+
+#lgd_exames_lab{
+    text-align: center;
+}
+
+#div_eventos_operatorios{
+    /*text-align: center;*/
+}
+
+#lgd_eventos_operatorios{
+    text-align: center;
+}
+
+#div_monitorizacao{
+    float: left;
+    width: 32%;
+    height: 450px;
+}
+
+#outros_monitorizacao{
+    width: 200px;
+}
+
+#div_tecnica{
+    float: left;
+    width: 32%;
+    height: 450px;
+}
+
+#div_acesso_vias_aereas{
+    float: left;
+    width: 32%;
+    height: 450px;
+    color: #ff0000;
+}
+
+#div_masc_laringea{
+    display: none;
+}
+
+#nr_masc_laringea{
+    width: 50px;
+}
+
+#div_int_oro_traqueal{
+    display: none;
+}
+
+
+
+/*-----------------------------------------------------------------Outros---------------------------------------------------------------------*/
+#radio_inf_opor_sim{
+    margin-left: 5px;
+}
+
+#radio_inf_opor_nao{
+    margin-left: 5px;
+}
+
+#radio_hiv_sim{
+    margin-left: 86px;
+}
+
+#radio_hiv_nao{
+    margin-left: 5px;
+}
+
+#radio_elilismo_sim{
+    margin-left: 104px;
+}
+
+#radio_elilismo_nao{
+    margin-left: 5px;
+}
+
+#radio_hepc_sim{
+    margin-left: 85px;
+}
+
+#radio_hepc_nao{
+    margin-left: 5px;
+}
+
+#radio_hepb_sim{
+    margin-left: 85px;
+}
+
+#radio_hepb_nao{
+    margin-left: 5px;
+}
+
+#radio_hepa_sim{
+    margin-left: 85px;
+}
+
+#radio_hepa_nao{
+    margin-left: 5px;
+}
+
+#radio_cirrose_sim{
+    margin-left: 105px;
+}
+
+#radio_cirrose_nao{
+    margin-left: 5px;
+}
+
+#radio_endocrinopalias_sim{
+    margin-left: 50px;
+}
+
+#radio_endocrinopalias_nao{
+    margin-left: 5px;
+}
+
+#radio_hipertireoidismo_sim{
+    margin-left: 50px;
+}
+
+#radio_hipertireoidismo_nao{
+    margin-left: 5px;
+}
+
+#radio_diabetes_sim{
+    margin-left: 95px;
+}
+
+#radio_diabetes_nao{
+    margin-left: 5px;
+}
+
+/*===========================================*/
+
+#radio_insuf_renal_sim{
+    margin-left: 92px;
+}
+
+#radio_insuf_renal_nao{
+    margin-left: 5px;
+}
+
+#radio_hemod_sim{
+    margin-left: 5px;
+}
+
+#radio_hemod_nao{
+    margin-left: 5px;
+}
+
+#radio_dist_hemo_sim{
+    margin-left: 13px;
+}
+
+#radio_dist_hemo_nao{
+    margin-left: 5px;
+}
+
+#radio_avc_previo_sim{
+    margin-left: 95px;
+}
+
+#radio_avc_previo_nao{
+    margin-left: 5px;
+}
+
+#radio_d_psi_sim{
+    margin-left: 76px;
+}
+
+#radio_d_psi_nao{
+    margin-left: 5px;
+}
+
+#radio_d_neuro_musc_sim{
+    margin-left: 54px;
+}
+
+#radio_d_neuro_musc_nao{
+    margin-left: 5px;
+}
+
+#radio_d_reuma_sim{
+    margin-left: 82px;
+}
+
+#radio_d_reuma_nao{
+    margin-left: 5px;
+}
+
+#radio_alt_neuro_sim{
+    margin-left: 68px;
+}
+
+#radio_alt_neuro_nao{
+    margin-left: 5px;
+}
+
+#radio_hemo_prev_sim{
+    margin-left: 22px;
+}
+
+#radio_hemo_prev_nao{
+    margin-left: 5px;
+}
+
+/*========================================================================Vias aéreas========================================================*/
+#radio_cav_oral_sim{
+    margin-left: 77px;
+}
+
+#radio_cav_oral_nao{
+    margin-left: 5px;
+}
+
+#radio_mall_1_sim{
+    margin-left: 90px;
+}
+
+#radio_mall_1_nao{
+    margin-left: 5px;
+}
+
+#radio_mall_2_sim{
+    margin-left: 90px;
+}
+
+#radio_mall_2_nao{
+    margin-left: 5px;
+}
+
+#radio_mall_3_sim{
+    margin-left: 90px;
+}
+
+#radio_mall_3_nao{
+    margin-left: 5px;
+}
+
+#radio_mall_4_sim{
+    margin-left: 90px;
+}
+
+#radio_mall_4_nao{
+    margin-left: 5px;
+}
+
+#radio_aber_boca_sim{
+    margin-left: 3px;
+}
+
+#radio_aber_boca_nao{
+    margin-left: 5px;
+}
+
+#radio_dentes_falhos_sim{
+    margin-left: 74px;
+}
+
+#radio_dentes_falhos_nao{
+    margin-left: 5px;
+}
+
+#radio_protese_sim{
+    margin-left: 51px;
+}
+
+#radio_protese_nao{
+    margin-left: 5px;
+}
+
+#radio_macroglossia_sim{
+    margin-left: 82px;
+}
+
+#radio_macroglossia_nao{
+    margin-left: 5px;
+}
+
+/*===========================================================Atenção=======================================================================*/
+#chk_via_aerea_dif{
+    margin-left: 156px;
+}
+
+#chk_anafilaxia{
+    margin-left: 156px;
+}
+#chk_anafilaxia{
+    margin-left: 122px;
+}
+#chk_estomago_cheio{
+    margin-left: 149px;
+}
+#chk_corticoide{
+    margin-left: 143px;
+}
+#chk_profilaxia{
+    margin-left: 44px;
+}
+
+/*========================================================Monitorização======================================================================*/
+
+#radio_cardioscopio_sim{
+    margin-left: 15px;
+}
+#radio_cardioscopio_nao{
+    margin-left: 5px;
+}
+
+#radio_ox_digital_sim{
+    margin-left: 34px;
+}
+#radio_ox_digital_nao{
+    margin-left: 5px;
+}
+
+#radio_pni_sim{
+    margin-left: 77px;
+}
+#radio_pni_nao{
+    margin-left: 5px;
+}
+
+#radio_painv_sim{
+    margin-left: 61px;
+}
+#radio_painv_nao{
+    margin-left: 5px;
+}
+
+#radio_an_gases_sim{
+    margin-left: 32px;
+}
+#radio_an_gases_nao{
+    margin-left: 5px;
+}
+
+#radio_capnografo_nao{
+    margin-left: 5px;
+}
+
+/*========================================================Técnica======================================================================*/
+#radio_tec_geral_sim{
+    margin-left: 138px;
+}
+#radio_tec_geral_nao{
+    margin-left: 5px;
+}
+
+#radio_plexo_sim{
+    margin-left: 5px;
+}
+#radio_plexo_nao{
+    margin-left: 5px;
+}
+
+#radio_neuroeixo_sim{
+    margin-left: 31px;
+}
+#radio_neuroeixo_nao{
+    margin-left: 5px;
+}
+
+#radio_combinada_sim{
+    margin-left: 101px;
+}
+#radio_combinada_nao{
+    margin-left: 5px;
+}
+
+#radio_sedacao_sim{
+    margin-left: 118px;
+}
+#radio_sedacao_nao{
+    margin-left: 5px;
+}
+
+#medicamentos_em_uso{
+    margin-left: 5px;
+}
+
+#alergias{
+    margin-left: 5px;
+}
+
+
+/*========================================================Monit Vias Aéreas======================================================================*/
+#radio_sub_mascara_sim{
+    margin-left: 72px;
+}
+#radio_sub_mascara_nao{
+    margin-left: 5px;
+}
+
+#radio_can_naso_sim{
+    margin-left: 74px;
+}
+#radio_can_naso_nao{
+    margin-left: 5px;
+}
+
+#radio_can_orofaringea_sim{
+    margin-left: 30px;
+}
+#radio_can_orofaringea_nao{
+    margin-left: 5px;
+}
+
+#radio_masc_laringea_sim{
+    margin-left: 40px;
+}
+#radio_masc_laringea_nao{
+    margin-left: 5px;
+}
+
+#radio_int_oro_traqueal_sim{
+    margin-left: 5px;
+}
+#radio_int_oro_traqueal_nao{
+    margin-left: 5px;
+}
+
+#diametro_tubo{
+    width: 110px;
+}
+
+#radio_tipo_naso_sim{
+    margin-left: 94px;
+}
+#radio_tipo_naso_nao{
+    margin-left: 5px;
+}
+
+#radio_tipo_aramado_sim{
+    margin-left: 69px;
+}
+#radio_tipo_aramado_nao{
+    margin-left: 5px;
+}
+
+#radio_tipo_dupla_luz_sim{
+    margin-left: 69px;
+}
+#radio_tipo_dupla_luz_nao{
+    margin-left: 5px;
+}
+
+#radio_balao_sim{
+    margin-left: 90px;
+}
+#radio_balao_nao{
+    margin-left: 5px;
+}
+
+#radio_laringoscopia_sim{
+    margin-left: 67px;
+}
+#radio_laringoscopia_nao{
+    margin-left: 5px;
+}
+
+#radio_broncofibroscopia_sim{
+    margin-left: 42px;
+}
+#radio_broncofibroscopia_nao{
+    margin-left: 5px;
+}
+
+#radio_est_luminoso_sim{
+    margin-left: 50px;
+}
+#radio_est_luminoso_nao{
+    margin-left: 5px;
+}
+
+#radio_videolaringoscopia_sim{
+    margin-left: 36px;
+}
+#radio_videolaringoscopia_nao{
+    margin-left: 5px;
+}
+
+#btn_enviar_form{
+    margin-left: 50%;
+}
+
+/*========================================================Agentes====================================================================*/
+#lgd_agentes{
+    text-align: center;
+}
+
+/*========================================================Agentes====================================================================*/
+#cirurgia{
+    width: 295px;
+}
+
+#anestesia{
+    width: 295px;
+}
+
+#cirurgiao{
+    width: 295px;
+}
+
+#div_e{
+    float: right;
+    margin-right: 15px;
+    margin-top: 8px;
+}
+
+.error{
+    display: block !important;
+}
+
+#div_primero_agente_incluir{
+
+}
+
+#div_segundo_agente_incluir{
+    display: none;
+}
+
+#div_terceiro_agente_incluir{
+    display: none;
+}
+
+#div_quarto_agente_incluir{
+    display: none;
+}
+
+#div_quinto_agente_incluir{
+    display: none;
+}
+
+#div_sexto_agente_incluir{
+    display: none;
+}
+
+#div_setimo_agente_incluir{
+    display: none;
+}
+
+#div_oitavo_agente_incluir{
+    display: none;
+}
+
+#div_nono_agente_incluir{
+    display: none;
+}
+
+#div_decimo_agente_incluir{
+    display: none;
+}
